@@ -25,26 +25,6 @@ public class TransactionController {
 
     private final TransactionService transactionService;
 
-    @PostMapping("/deposit")
-    public ResponseEntity<TransactionDto.Response> deposit(
-            @Valid @RequestBody TransactionDto.DepositRequest request) {
-
-        return ResponseEntity.ok(transactionService.deposit(request));
-    }
-
-    @PostMapping("/withdraw")
-    public ResponseEntity<TransactionDto.Response> withdraw(
-            @Valid @RequestBody TransactionDto.WithdrawRequest request) {
-
-        return ResponseEntity.ok(transactionService.withdraw(request));
-    }
-
-    @GetMapping("/balance")
-    public ResponseEntity<BigDecimal> checkBalance(
-            @RequestParam String phoneNumber) {
-
-        return ResponseEntity.ok(transactionService.checkBalance(phoneNumber));
-    }
 
     @GetMapping("/history")
     public ResponseEntity<List<TransactionDto.Response>> getHistory(

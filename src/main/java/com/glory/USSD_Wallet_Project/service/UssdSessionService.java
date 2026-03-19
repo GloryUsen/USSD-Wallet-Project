@@ -16,6 +16,7 @@ public class UssdSessionService {
 
     private final UssdSessionRepository sessionRepository;
     private final TransactionService transactionService;
+    private final BankAccountService bankAccountService;
 
     public String handleRequest(UssdSessionRequest request) {
 
@@ -71,7 +72,7 @@ public class UssdSessionService {
             req.setPhoneNumber(phone);
             req.setAmount(new java.math.BigDecimal(amountStr));
 
-            var res = transactionService.deposit(req);
+            var res = bankAccountService.deposit(req);
             return "END Deposit successful: " + res.getAmount();
 
         } catch (Exception e) {
@@ -85,7 +86,7 @@ public class UssdSessionService {
             req.setPhoneNumber(phone);
             req.setAmount(new java.math.BigDecimal(amountStr));
 
-            var res = transactionService.withdraw(req);
+            var res = bankAccountService.withdraw(req);
             return "END Withdraw successful: " + res.getAmount();
 
         } catch (Exception e) {
@@ -95,7 +96,7 @@ public class UssdSessionService {
 
     private String balance(String phone) {
         try {
-            return "END Balance: " + transactionService.checkBalance(phone);
+            return "END Balance: " + bankAccountService.checkBalance(phone);
         } catch (Exception e) {
             return "END " + e.getMessage();
         }
