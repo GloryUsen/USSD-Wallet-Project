@@ -1,6 +1,5 @@
 package com.glory.USSD_Wallet_Project.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,10 +29,10 @@ public class BankAccountController {
         return bankAccountService.createWallet(account);
     }
 
-    @GetMapping("/balance")
-    public String getBalance(@RequestParam String phoneNumber) {
-        return bankAccountService.getBalance(phoneNumber);
-    }
+    // @GetMapping("/balance")
+    // public String getBalance(@RequestParam String phoneNumber) {
+    //     return bankAccountService.getBalance(phoneNumber);
+    // }
 }
 
 

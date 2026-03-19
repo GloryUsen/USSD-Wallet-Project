@@ -28,6 +28,19 @@ public class TransactionDto {
         private String description;
     }
 
+
+     @Data
+    public static class WithdrawRequest {
+        @NotBlank(message = "Phone number is required")
+        private String phoneNumber;
+
+        @NotNull(message = "Amount is required")
+        @DecimalMin(value = "0.01", message = "Withdrawal amount must be greater than zero")
+        private BigDecimal amount;
+
+        private String description;
+    }
+
      // CREDIT or DEBIT
 
     @Data

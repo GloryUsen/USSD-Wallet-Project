@@ -1,5 +1,7 @@
 package com.glory.USSD_Wallet_Project.service;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Service;
 
 import com.glory.USSD_Wallet_Project.model.Account;
@@ -29,7 +31,7 @@ private final BankAccountRepository bankAccountRepository;
 
         bankAccount.setAccountNumber(account.getAccountNumber());
 
-        bankAccount.setAccountBalance(0.0);
+        bankAccount.setAccountBalance(BigDecimal.ZERO);
 
         bankAccountRepository.save(bankAccount);
 
