@@ -2,7 +2,6 @@ package com.glory.USSD_Wallet_Project.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -60,7 +59,8 @@ public class AccountDto {
                     }
 
 
-                     @Data class BalanceResponse { 
+                     @Data 
+                     public static class BalanceResponse { 
                         private String phoneNumber; 
                         private String name; 
                         private java.math.BigDecimal balance; 

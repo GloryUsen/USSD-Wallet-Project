@@ -5,8 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-
-
+import com.glory.USSD_Wallet_Project.dto.AccountDto;
 import com.glory.USSD_Wallet_Project.dto.TransactionDto;
 import com.glory.USSD_Wallet_Project.model.Account;
 import com.glory.USSD_Wallet_Project.model.BankAccount;
@@ -54,18 +53,41 @@ public class BankAccountService {
         return "Wallet created successfully for account: " + account.getAccountNumber();
     }
 
-    public String getBalance(String phoneNumber) {
+    // public String getBalance(String phoneNumber) {
 
-        BankAccount bankAccount = bankAccountRepository
-                .findByAccount_PhoneNumber(phoneNumber);
+    //     BankAccount bankAccount = bankAccountRepository
+    //             .findByAccount_PhoneNumber(phoneNumber);
 
-        if (bankAccount == null) {
-            return "Wallet not found for this phone number.";
-        }
+    //     if (bankAccount == null) {
+    //         return "Wallet not found for this phone number.";
+    //     }
 
-        return "Your balance is: " + bankAccount.getAccountBalance();
+    //     return "Your balance is: " + bankAccount.getAccountBalance();
+    // }
+
+    // public String getBalance(String phoneNumbe){
+    //     BankAccount bankAccount = bankAccountRepository.findByAccount_PhoneNumber(phoneNumbe);
+    //     if(bankAccount == null){
+    //         return "Wallet not found";
+    //     }
+    //         return "Your balance is :" + bankAccount.getAccountBalance();
+        
+
+public AccountDto.BalanceResponse getBalance(String phoneNumber) {
+    BankAccount bankAccount = bankAccountRepository.findByAccount_PhoneNumber(phoneNumber);
+
+    if (bankAccount == null) {
+        throw new IllegalArgumentException("Wallet not found");
     }
 
+    AccountDto.BalanceResponse response = new AccountDto.BalanceResponse();
+    response.setPhoneNumber(bankAccount.getAccount().getPhoneNumber());
+  response.setName(bankAccount.getAccount().getUsername());
+    response.setBalance(bankAccount.getAccountBalance());
+    response.setCurrency("NGN");
+
+    return response;
+}
 
      @Transactional
     public TransactionDto.Response deposit(TransactionDto.DepositRequest request) {
